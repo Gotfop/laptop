@@ -42,4 +42,8 @@ class User(BaseModel):
 class RegUser(BaseModel):
     nickname : str
     password : str
+
+class Filial(BaseModel):
+    filial : str
+    isactive : bool = True
     

@@ -1,6 +1,6 @@
 
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean
-from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from sqlalchemy.orm import DeclarativeBase, sessionmaker, relationship
 
 SQLALCHEMY_DATABASE_URL = 'sqlite:///database.db'
 
@@ -11,19 +11,19 @@ session = sessionmaker(engine)
 class Base(DeclarativeBase):
     pass
 
+class FilialsModel(Base):
+    __tablename__ = 'filial'
+    
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    filial = Column(String,nullable=False)
+    isative = Column(Boolean, default=True)
+
 
 class MarksModel(Base):
     __tablename__ = 'mark'
     
     id = Column(Integer, autoincrement=True, primary_key=True)
     mark = Column(String,nullable=False)
-
-class FilialsModel(Base):
-    __tablename__ = 'filials'
-
-    id = Column(Integer,primary_key=True,autoincrement=True)
-    title = Column(String,nullable=False)
-    address = Column(String)
 
 class LaptopsModel(Base):
      __tablename__ = 'laptop'
@@ -40,6 +40,9 @@ class LaptopsModel(Base):
      drive_amount = Column(Integer)
      filial_id = Column(ForeignKey(FilialsModel.id, ondelete="CASCADE"))
 
+     filial = relationship('FilialsModel', backref='filial')
+     mark = relationship('MarksModel', backref='mark')
+
 
 class NotesModel(Base):
     __tablename__ = 'note'
@@ -49,6 +52,10 @@ class NotesModel(Base):
     text = Column(String)
     user_id = Column(String)
     laptop_id = Column(ForeignKey(LaptopsModel.id, ondelete="CASCADE"))
+
+    laptop = relationship('LaptopsModel', backref='laptop')
+
+
 
 
 class UserModel(Base):

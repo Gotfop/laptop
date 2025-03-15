@@ -3,6 +3,18 @@ from sqlalchemy import select,insert
 from database import LaptopsModel,NotesModel,UserModel
 from shemas import Laptop,Note
 
+class FilialsServise:
+
+    @classmethod
+    def get_all(cls):
+        pass
+
+    def add_filial(cls):
+        pass
+
+    def delete_filial(cls):
+        pass
+
 class LaptopServise:
 
     @classmethod

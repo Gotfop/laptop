@@ -21,8 +21,8 @@ VALUES
 (6, 2, 'ROG Zephyrus', 'AMD Ryzen 9 5900HX', 8, '3.3 GHz', '32 GB', 'NVIDIA RTX 3060', 'SSD', 2048,3),
 (7, 3, 'EliteBook 840', 'Intel Core i5-1135G7', 4, '2.4 GHz', '8 GB', 'Intel Iris Xe', 'SSD', 512,3);
 
-INSERT INTO filials (id, title, address)
+INSERT INTO filial (id, filial,isative )
 VALUES
-    (1,'Мозайка',NULL),
-    (2,'Лотос',NULL),
-    (3,'Звездный',NULL);
+    (1,'Мозайка',TRUE),
+    (2,'Лотос',TRUE),
+    (3,'Звездный',TRUE);
