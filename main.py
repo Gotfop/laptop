@@ -5,11 +5,13 @@ from routers.auth import auth_router
 from routers.laptop import laptop_router
 from routers.notes import note_router
 from routers.user import user_router
+from routers.filials import filial_router
 
 
 
 
 app = FastAPI()
+app.include_router(filial_router)
 app.include_router(auth_router)
 app.include_router(laptop_router)
 app.include_router(note_router)

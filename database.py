@@ -18,12 +18,16 @@ class FilialsModel(Base):
     filial = Column(String,nullable=False)
     isative = Column(Boolean, default=True)
 
+    laptop = relationship('LaptopsModel', back_populates='filial')
+
 
 class MarksModel(Base):
     __tablename__ = 'mark'
     
     id = Column(Integer, autoincrement=True, primary_key=True)
     mark = Column(String,nullable=False)
+
+    laptop = relationship('LaptopsModel', back_populates='mark')
 
 class LaptopsModel(Base):
      __tablename__ = 'laptop'
@@ -40,8 +44,9 @@ class LaptopsModel(Base):
      drive_amount = Column(Integer)
      filial_id = Column(ForeignKey(FilialsModel.id, ondelete="CASCADE"))
 
-     filial = relationship('FilialsModel', backref='filial')
-     mark = relationship('MarksModel', backref='mark')
+     filial = relationship('FilialsModel', back_populates='laptop')
+     mark = relationship('MarksModel', back_populates='laptop')
+     note = relationship('NotesModel', back_populates='laptop')
 
 
 class NotesModel(Base):
@@ -53,7 +58,7 @@ class NotesModel(Base):
     user_id = Column(String)
     laptop_id = Column(ForeignKey(LaptopsModel.id, ondelete="CASCADE"))
 
-    laptop = relationship('LaptopsModel', backref='laptop')
+    laptop = relationship('LaptopsModel', back_populates='note')
 
 
 

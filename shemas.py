@@ -45,5 +45,5 @@ class RegUser(BaseModel):
 
 class Filial(BaseModel):
     filial : str
-    isactive : bool = True
+    isative : bool = True
     

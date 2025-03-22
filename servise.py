@@ -1,19 +1,37 @@
 from database import MarksModel, session
-from sqlalchemy import select,insert
-from database import LaptopsModel,NotesModel,UserModel
-from shemas import Laptop,Note
+from sqlalchemy import select,insert,update
+from database import LaptopsModel,NotesModel,UserModel,FilialsModel
+from shemas import Laptop,Note,Filial
 
 class FilialsServise:
 
     @classmethod
     def get_all(cls):
-        pass
+        with session() as sess:
+            query = select(FilialsModel)
+            return(sess.execute(query).scalars().all())
+        
+    @classmethod
+    def add_filial(cls,filial: Filial):
 
-    def add_filial(cls):
-        pass
-
-    def delete_filial(cls):
-        pass
+        fil_dict = filial.model_dump()
+        filial_object = FilialsModel(**fil_dict)
+        with session() as sess:
+            sess.add(filial_object)
+            sess.commit()
+            return filial_object.id
+        
+    @classmethod
+    def delete_filial(cls, id):
+        with session() as sess:
+            query = select(FilialsModel).filter_by(id = id)
+            filial = sess.execute(query).scalar_one_or_none()
+            if filial:
+                filial.isative = False
+                sess.add(filial)
+                sess.commit()   
+                return True
+            return False
 
 class LaptopServise:
 
@@ -43,7 +61,14 @@ class LaptopServise:
         with session() as sess:
             sess.add(laptop_object)
             sess.commit()
-            return laptop_object.id        
+            return laptop_object.id  
+
+    @classmethod
+    def update_filial(cls,id,new_id):
+        with session() as sess:
+            sess.query(LaptopsModel).filter(LaptopsModel.filial_id == id).update({'filial_id': new_id})
+            sess.commit()
+            return True
         
 class NoteServise:
 
