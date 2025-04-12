@@ -11,7 +11,8 @@ def get_all():                                                                 #
 
 
 @laptop_router.post('/')
-def add_laptop(laptop: Laptop, sysadmin : User = Depends(get_sysadmin)):
+def add_laptop(laptop: Laptop):
+    print(laptop)
     id = LaptopServise.add_laptop(laptop)
     return {"message": id}
 

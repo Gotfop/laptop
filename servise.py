@@ -2,6 +2,7 @@ from database import MarksModel, session
 from sqlalchemy import select,insert,update
 from database import LaptopsModel,NotesModel,UserModel,FilialsModel
 from shemas import Laptop,Note,Filial
+from sqlalchemy.orm import joinedload
 
 class FilialsServise:
 
@@ -44,14 +45,14 @@ class LaptopServise:
     @classmethod
     def get_all(cls):
         with session() as sess:
-            query = select(LaptopsModel)
+            query = select(LaptopsModel).options(joinedload(LaptopsModel.mark), joinedload(LaptopsModel.filial))
             return(sess.execute(query).scalars().all())
         
 
     @classmethod
     def get_by_id(cls,id):
         with session() as sess:
-            query = select(LaptopsModel).filter_by(id = id)
+            query = select(LaptopsModel).filter_by(id = id).options(joinedload(LaptopsModel.mark), joinedload(LaptopsModel.filial))
             return(sess.execute(query).scalar_one_or_none())
         
     @classmethod

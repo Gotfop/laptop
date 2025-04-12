@@ -22,6 +22,7 @@ class Laptop(BaseModel):
      video_card :str | None
      drive_type : DriveTypeEnum
      drive_amount : int
+     filial_id : int
 
 
 
