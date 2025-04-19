@@ -13,6 +13,7 @@ class DriveTypeEnum(str, Enum):
     hdd = 'HDD'
 
 class Laptop(BaseModel):
+     filial_id : int
      mark_id : int
      model : str
      CPU : str
@@ -22,7 +23,6 @@ class Laptop(BaseModel):
      video_card :str | None
      drive_type : DriveTypeEnum
      drive_amount : int
-     filial_id : int
 
 
 
