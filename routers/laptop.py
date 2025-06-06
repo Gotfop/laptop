@@ -29,4 +29,6 @@ def get_laptop_id(id,user: User = Depends(get_current_user)):
 
 @laptop_router.get('/mark')
 def get_mark():
-    return LaptopServise.get_mark()
+    a = LaptopServise.get_mark()
+    print(a)
+    return a

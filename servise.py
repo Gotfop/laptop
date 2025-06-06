@@ -40,7 +40,9 @@ class LaptopServise:
     def get_mark(cls):
         with session() as sess:
             query = select(MarksModel)
-            return(sess.execute(query).scalars().all())
+            a = sess.execute(query).scalars().all()
+            print(a)
+            return(a)
 
     @classmethod
     def get_all(cls):
