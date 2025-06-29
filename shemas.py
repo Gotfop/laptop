@@ -47,4 +47,9 @@ class RegUser(BaseModel):
 class Filial(BaseModel):
     filial : str
     isative : bool = True
+
+
+class Mark(BaseModel):
+    mark : str
+
     

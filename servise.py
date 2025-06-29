@@ -1,7 +1,7 @@
 from database import MarksModel, session
 from sqlalchemy import select,insert,update
 from database import LaptopsModel,NotesModel,UserModel,FilialsModel
-from shemas import Laptop,Note,Filial
+from shemas import Laptop,Note,Filial,Mark
 from sqlalchemy.orm import joinedload
 
 class FilialsServise:
@@ -44,6 +44,19 @@ class LaptopServise:
             print(a)
             return(a)
 
+            
+    @classmethod
+    def add_mark(cls,mark: Mark):
+
+        mark_dict = mark.model_dump()
+        mark_object = MarksModel(**mark_dict)
+        with session() as sess:
+            sess.add(mark_object)
+            sess.commit()
+            return mark_object.id
+
+
+
     @classmethod
     def get_all(cls):
         with session() as sess:
@@ -72,6 +85,20 @@ class LaptopServise:
             sess.query(LaptopsModel).filter(LaptopsModel.filial_id == id).update({'filial_id': new_id})
             sess.commit()
             return True
+        
+
+    @classmethod
+    def delete_laptop(cls,id):
+        with session() as sess:
+            laptop = sess.get(LaptopsModel,id)
+            if laptop:
+                sess.delete(laptop)
+                sess.commit()
+                return True
+            
+            else:
+                return False
+
         
 class NoteServise:
 
