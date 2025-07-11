@@ -28,16 +28,16 @@ def add_mark(mark: Mark):
     return {"message": id}
     
 
-@laptop_router.put('/{id: int}')
-def update(id, sysadmin: User = Depends(get_sysadmin)):
+@laptop_router.put('/{id}')
+def update(id: int, sysadmin: User = Depends(get_sysadmin)):
     lpt = LaptopServise.get_by_id(id)
 
-@laptop_router.delete('/{id: int}', status_code=status.HTTP_204_NO_CONTENT)
+@laptop_router.delete('/{id}', status_code=status.HTTP_204_NO_CONTENT)
 
-def delete_laptop(id):                                     # ,user: User = Depends(get_current_user)
+def delete_laptop(id: int):                                     # ,user: User = Depends(get_current_user)
     return LaptopServise.delete_laptop(id)
 
 
-@laptop_router.get('/{id: int}')
-def get_laptop_id(id):                                     # ,user: User = Depends(get_current_user)
+@laptop_router.get('/{id}')
+def get_laptop_id(id: int):                                     # ,user: User = Depends(get_current_user)
     return LaptopServise.get_by_id(id)

@@ -15,8 +15,8 @@ def add_filial(filial :Filial):
     id = FilialsServise.add_filial(filial)
     return {"message": id}
 
-@filial_router.delete('/{id}')
-def delete_filial(id: int):
+@filial_router.delete('/{id}', status_code=status.HTTP_204_NO_CONTENT)
+def delete_filial(id: int,):
     laptops = LaptopServise.get_all()
     for laptop in laptops:
         if laptop.filial_id == id:
